@@ -1,0 +1,14 @@
+ALARM: "sg-production-backend-high-network-in-percent-alarm" in AP-SOUTHEAST-1
+
+Threshold: > 281,250,000 bytes over 2 datapoints (5 min each)
+Current Value: 305,000,000 bytes
+
+Metric:
+  Namespace: AWS/EC2
+  MetricName: NetworkIn
+  Dimensions:
+    - InstanceId: i-xxxxxxxxxxxxxxxxx
+
+Triggered at: 2025-08-06 14:03:00 UTC
+
+Link: https://console.aws.amazon.com/cloudwatch/home?region=ap-southeast-1#alarmsV2:alarm/sg-production-backend-high-network-in-percent-alarm

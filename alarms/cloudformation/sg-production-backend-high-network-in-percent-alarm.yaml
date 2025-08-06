@@ -1,0 +1,157 @@
+# 1. prod-backend-network-in-alarm
+Type: AWS::CloudWatch::Alarm
+Properties:
+  AlarmName: prod-backend-network-in-alarm
+  AlarmDescription: Alarm for high inbound network traffic
+  ActionsEnabled: false
+  AlarmActions:
+    - arn:aws:sns:ap-southeast-1:123456789012:my-alarm-topic
+  MetricName: NetworkIn
+  Namespace: AWS/EC2
+  Statistic: Average
+  Dimensions:
+    - Name: InstanceId
+      Value: i-xxxxxxxxxxxxxxxxx
+  Period: 300
+  EvaluationPeriods: 2
+  DatapointsToAlarm: 2
+  Threshold: 281250000
+  ComparisonOperator: GreaterThanThreshold
+  TreatMissingData: missing
+
+# 2. prod-backend-network-out-alarm
+Type: AWS::CloudWatch::Alarm
+Properties:
+  AlarmName: prod-backend-network-out-alarm
+  AlarmDescription: Alarm for high outbound network traffic
+  ActionsEnabled: false
+  AlarmActions:
+    - arn:aws:sns:ap-southeast-1:123456789012:my-alarm-topic
+  MetricName: NetworkOut
+  Namespace: AWS/EC2
+  Statistic: Average
+  Dimensions:
+    - Name: InstanceId
+      Value: i-xxxxxxxxxxxxxxxxx
+  Period: 300
+  EvaluationPeriods: 2
+  DatapointsToAlarm: 2
+  Threshold: 281250000
+  ComparisonOperator: GreaterThanThreshold
+  TreatMissingData: missing
+
+# 3. prod-backend-disk-anomaly-alarm
+Type: AWS::CloudWatch::Alarm
+Properties:
+  AlarmName: prod-backend-disk-anomaly-alarm
+  AlarmDescription: Anomaly alarm for disk usage
+  ActionsEnabled: false
+  AlarmActions:
+    - arn:aws:sns:ap-southeast-1:123456789012:my-alarm-topic
+  EvaluationPeriods: 2
+  DatapointsToAlarm: 2
+  ThresholdMetricId: anomaly_band
+  ComparisonOperator: LessThanLowerOrGreaterThanUpperThreshold
+  TreatMissingData: missing
+  Metrics:
+    - Id: disk_usage_percent
+      ReturnData: true
+      MetricStat:
+        Metric:
+          Namespace: CWAgent
+          MetricName: disk_used_percent
+          Dimensions:
+            - Name: path
+              Value: /
+            - Name: device
+              Value: nvme0n1p1
+            - Name: fstype
+              Value: xfs
+            - Name: InstanceId
+              Value: i-xxxxxxxxxxxxxxxxx
+        Period: 300
+        Stat: Average
+        Unit: Percent
+    - Id: anomaly_band
+      Label: Disk Usage Anomaly
+      ReturnData: true
+      Expression: ANOMALY_DETECTION_BAND(disk_usage_percent, 0.1)
+
+# 4. prod-frontend-disk-anomaly-alarm
+Type: AWS::CloudWatch::Alarm
+Properties:
+  AlarmName: prod-frontend-disk-anomaly-alarm
+  AlarmDescription: Anomaly alarm for frontend disk usage
+  ActionsEnabled: false
+  AlarmActions:
+    - arn:aws:sns:ap-southeast-1:123456789012:my-alarm-topic
+  EvaluationPeriods: 2
+  DatapointsToAlarm: 2
+  ThresholdMetricId: anomaly_band
+  ComparisonOperator: LessThanLowerOrGreaterThanUpperThreshold
+  TreatMissingData: missing
+  Metrics:
+    - Id: disk_usage_percent
+      ReturnData: true
+      MetricStat:
+        Metric:
+          Namespace: CWAgent
+          MetricName: disk_used_percent
+          Dimensions:
+            - Name: InstanceId
+              Value: i-yyyyyyyyyyyyyyyyy
+            - Name: device
+              Value: nvme0n1p1
+            - Name: path
+              Value: /
+            - Name: fstype
+              Value: xfs
+        Period: 300
+        Stat: Average
+        Unit: Percent
+    - Id: anomaly_band
+      Label: Disk Usage Anomaly
+      ReturnData: true
+      Expression: ANOMALY_DETECTION_BAND(disk_usage_percent, 0.1)
+
+# 5. prod-frontend-network-in-alarm
+Type: AWS::CloudWatch::Alarm
+Properties:
+  AlarmName: prod-frontend-network-in-alarm
+  AlarmDescription: Alarm for frontend high network-in
+  ActionsEnabled: false
+  AlarmActions:
+    - arn:aws:sns:ap-southeast-1:123456789012:my-alarm-topic
+  MetricName: NetworkIn
+  Namespace: AWS/EC2
+  Statistic: Average
+  Dimensions:
+    - Name: InstanceId
+      Value: i-yyyyyyyyyyyyyyyyy
+  Period: 300
+  EvaluationPeriods: 2
+  DatapointsToAlarm: 2
+  Threshold: 281250000
+  ComparisonOperator: GreaterThanThreshold
+  TreatMissingData: missing
+
+# 6. prod-frontend-network-out-alarm
+Type: AWS::CloudWatch::Alarm
+Properties:
+  AlarmName: prod-frontend-network-out-alarm
+  AlarmDescription: Alarm for frontend high network-out
+  ActionsEnabled: false
+  AlarmActions:
+    - arn:aws:sns:ap-southeast-1:123456789012:my-alarm-topic
+  MetricName: NetworkOut
+  Namespace: AWS/EC2
+  Statistic: Average
+  Dimensions:
+    - Name: InstanceId
+      Value: i-yyyyyyyyyyyyyyyyy
+  Period: 300
+  EvaluationPeriods: 2
+  DatapointsToAlarm: 2
+  Threshold: 281250000
+  ComparisonOperator: GreaterThanThreshold
+  TreatMissingData: missing

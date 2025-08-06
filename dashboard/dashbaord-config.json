@@ -1,0 +1,435 @@
+{
+    "variables": [
+        {
+            "type": "pattern",
+            "pattern": "(?<region>[^|]+)\\|(?<loadBalancer>.+)",
+            "inputType": "radio",
+            "id": "Region",
+            "label": "Region",
+            "defaultValue": "us-east-1|app/us-prod-backend-lb/d62c324554929daa",
+            "visible": true,
+            "values": [
+                {
+                    "value": "us-east-1|app/us-prod-backend-lb/d62c324554929daa",
+                    "label": "US-Prod"
+                },
+                {
+                    "value": "ap-southeast-2|app/au-prod-backend-lb/26a8a8ab53d198f6",
+                    "label": "AU-Prod"
+                },
+                {
+                    "value": "ap-southeast-1|app/sgp-prod-backend-lb/83b82f0a5ce673ba",
+                    "label": "SG-Prod"
+                }
+            ]
+        },
+        {
+            "type": "property",
+            "property": "InstanceId",
+            "inputType": "select",
+            "id": "InstanceId",
+            "label": "InstanceId",
+            "defaultValue": "i-09e2a9d60ccb6a3f7",
+            "visible": true,
+            "values": [
+                {
+                    "value": "i-09e2a9d60ccb6a3f7",
+                    "label": "[US-Prod] Event Scheduler"
+                },
+                {
+                    "value": "i-0a0973dd3b6bf4d16",
+                    "label": "[US-Prod] Backend Server"
+                },
+                {
+                    "value": "i-0a3a5212dd9beefef",
+                    "label": "[AU-Prod] Event Scheduler"
+                },
+                {
+                    "value": "i-097844508c67855be",
+                    "label": "[AU-Prod] Backend Server"
+                },
+                {
+                    "value": "i-07c8a35f3be174caa",
+                    "label": "[SG-Prod] Event Scheduler"
+                },
+                {
+                    "value": "i-0adcd10ce2ae9d181",
+                    "label": "[SG-Prod] Backend Server"
+                }
+            ]
+        }
+    ],
+  "widgets": [
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 2,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "CWAgent", "disk_used_percent", "path", "/", "InstanceId", "i-xxxxxxxxxxxxxxxxx", "device", "xvda1", "fstype", "xfs", { "region": "us-east-1", "label": "Event Scheduler" } ],
+          [ "...", "i-xxxxxxxxxxxxxxxxx", ".", ".", ".", ".", { "region": "us-east-1", "color": "#ff7f0e", "label": "Backend" } ]
+        ],
+        "view": "gauge",
+        "region": "ap-southeast-2",
+        "yAxis": {
+          "left": {
+            "min": 0,
+            "max": 100
+          }
+        },
+        "annotations": {
+          "horizontal": [
+            {
+              "color": "#d62728",
+              "label": "Disk Space Hitting Maximum Capacity!",
+              "value": 90,
+              "fill": "above"
+            }
+          ]
+        },
+        "stat": "Average",
+        "period": 300,
+        "title": "[US-Prod] Overall Average Disk Utilization (%)"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 8,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "AWS/EC2", "CPUUtilization", "InstanceId", "i-xxxxxxxxxxxxxxxxx", { "region": "us-east-1", "label": "Event Scheduler" } ],
+          [ "...", "i-xxxxxxxxxxxxxxxxx", { "region": "us-east-1", "label": "Backend" } ]
+        ],
+        "sparkline": true,
+        "view": "singleValue",
+        "region": "ap-southeast-2",
+        "stat": "Average",
+        "period": 300,
+        "title": "[US-Prod] Overall Average CPUUtilization (%)"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 14,
+      "width": 6,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "AWS/EC2", "CPUUtilization", "InstanceId", "i-xxxxxxxxxxxxxxxxx", { "region": "us-east-1", "color": "#1f77b4", "label": "Event Scheduler" } ],
+          [ "...", "i-xxxxxxxxxxxxxxxxx", { "region": "us-east-1", "color": "#ff7f0e", "label": "Backend", "visible": false } ]
+        ],
+        "view": "timeSeries",
+        "stacked": false,
+        "region": "ap-southeast-2",
+        "stat": "Average",
+        "period": 300,
+        "title": "[US-Prod] Event Scheduler CPUUtilization (%)"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 6,
+      "y": 14,
+      "width": 6,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "AWS/EC2", "CPUUtilization", "InstanceId", "i-xxxxxxxxxxxxxxxxx", { "region": "us-east-1", "color": "#1f77b4", "label": "Event Scheduler", "visible": false } ],
+          [ "...", "i-xxxxxxxxxxxxxxxxx", { "region": "us-east-1", "color": "#ff7f0e", "label": "Backend" } ]
+        ],
+        "view": "timeSeries",
+        "stacked": false,
+        "region": "ap-southeast-2",
+        "stat": "Average",
+        "period": 300,
+        "title": "[US-Prod] Backend CPUUtilization (%)"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 8,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "CWAgent", "mem_used_percent", "InstanceId", "i-xxxxxxxxxxxxxxxxx", { "label": "Event Scheduler", "color": "#1f77b4", "region": "us-east-1" } ],
+          [ "...", "i-xxxxxxxxxxxxxxxxx", { "label": "Backend", "color": "#ff7f0e", "region": "us-east-1" } ]
+        ],
+        "sparkline": true,
+        "view": "gauge",
+        "region": "us-east-1",
+        "stat": "Average",
+        "period": 300,
+        "yAxis": {
+          "left": {
+            "min": 0,
+            "max": 100
+          }
+        },
+        "annotations": {
+          "horizontal": [
+            {
+              "color": "#d62728",
+              "label": "RAM Usage Nearing Maximum Capacity!",
+              "value": 90,
+              "fill": "above"
+            }
+          ]
+        },
+        "title": "[US-Prod] Overall Average RAM Usage (%)"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 14,
+      "width": 6,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "CWAgent", "mem_used_percent", "InstanceId", "i-xxxxxxxxxxxxxxxxx", { "label": "Event Scheduler", "color": "#1f77b4", "region": "us-east-1" } ]
+        ],
+        "sparkline": true,
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "stat": "Average",
+        "period": 300,
+        "stacked": false,
+        "title": "[US-Prod] Event Scheduler RAM Usage (%)"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 18,
+      "y": 14,
+      "width": 6,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          [ "CWAgent", "mem_used_percent", "InstanceId", "i-xxxxxxxxxxxxxxxxx", { "label": "Backend", "color": "#ff7f0e", "region": "us-east-1" } ]
+        ],
+        "sparkline": true,
+        "view": "timeSeries",
+        "region": "us-east-1",
+        "stat": "Average",
+        "period": 300,
+        "stacked": false,
+        "title": "[US-Prod] Backend RAM Usage (%)"
+      }
+    },
+    {
+      "type": "alarm",
+      "x": 0,
+      "y": 2,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "title": "[US-Prod] Alarms",
+        "alarms": [
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:us-prod-be_EC2_High-Disk-Usage",
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:us-prod-es_EC2_High-Disk-Usage",
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:us-prod-be_EC2_High-CPU-Usage",
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:us-prod-es_EC2_High-CPU-Usage",
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:us-prod-be_EC2_High-RAM-Usage",
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:us-prod-es_EC2_High-RAM-Usage"
+        ]
+      }
+    },
+    {
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "width": 24,
+      "height": 2,
+      "properties": {
+        "background": "transparent",
+        "markdown": "&nbsp;\n# US-Prod"
+      }
+    },
+    {
+      "type": "text",
+      "x": 0,
+      "y": 20,
+      "width": 24,
+      "height": 2,
+      "properties": {
+        "background": "transparent",
+        "markdown": "&nbsp;\n# AU-Prod"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 80,
+      "width": 24,
+      "height": 5,
+      "properties": {
+        "title": "your-api-high-latency-alarm",
+        "annotations": {
+          "alarms": [
+            "arn:aws:cloudwatch:us-east-1:123456789012:alarm:your-api-high-latency-alarm"
+          ]
+        },
+        "view": "timeSeries",
+        "stacked": false
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 85,
+      "width": 24,
+      "height": 5,
+      "properties": {
+        "title": "your-api-4XX-alarm",
+        "annotations": {
+          "alarms": [
+            "arn:aws:cloudwatch:us-east-1:123456789012:alarm:your-api-4XX-alarm"
+          ]
+        },
+        "view": "timeSeries",
+        "stacked": false
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 90,
+      "width": 24,
+      "height": 5,
+      "properties": {
+        "title": "your-api-5XX-alarm",
+        "annotations": {
+          "alarms": [
+            "arn:aws:cloudwatch:us-east-1:123456789012:alarm:your-api-5XX-alarm"
+          ]
+        },
+        "view": "timeSeries",
+        "stacked": false
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 95,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "view": "timeSeries",
+        "stacked": false,
+        "metrics": [
+          [ "AWS/ApiGateway", "Latency", "ApiName", "your-api-au-prod" ]
+        ],
+        "region": "ap-southeast-2",
+        "title": "AU Prod Latency"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 95,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "view": "timeSeries",
+        "stacked": false,
+        "metrics": [
+          [ "AWS/ApiGateway", "Latency", "ApiName", "your-api-us-prod", { "region": "us-east-1" } ]
+        ],
+        "region": "ap-southeast-2",
+        "title": "US Prod Latency"
+      }
+    },
+    {
+      "type": "alarm",
+      "x": 6,
+      "y": 40,
+      "width": 11,
+      "height": 2,
+      "properties": {
+        "title": "[SG-UAT] Alarms",
+        "alarms": [
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:your-api-5XX-alarm"
+        ]
+      }
+    },
+    {
+      "type": "alarm",
+      "x": 6,
+      "y": 60,
+      "width": 11,
+      "height": 2,
+      "properties": {
+        "title": "[SG-STG-Demo] Alarms",
+        "alarms": [
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:your-api-5XX-alarm"
+        ]
+      }
+    },
+    {
+      "type": "alarm",
+      "x": 0,
+      "y": 22,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "title": "[AU-Prod] Alarms",
+        "alarms": [
+          "arn:aws:cloudwatch:ap-southeast-2:123456789012:alarm:au-prod-backend-high-cpu",
+          "arn:aws:cloudwatch:ap-southeast-2:123456789012:alarm:au-prod-event-high-cpu",
+          "arn:aws:cloudwatch:ap-southeast-2:123456789012:alarm:au-prod-backend-high-disk",
+          "arn:aws:cloudwatch:ap-southeast-2:123456789012:alarm:au-prod-event-high-disk",
+          "arn:aws:cloudwatch:ap-southeast-2:123456789012:alarm:au-prod-backend-high-ram",
+          "arn:aws:cloudwatch:ap-southeast-2:123456789012:alarm:au-prod-event-high-ram"
+        ]
+      }
+    },
+    {
+      "type": "alarm",
+      "x": 0,
+      "y": 2,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "title": "[US-Prod] Alarms",
+        "alarms": [
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:us-prod-backend-high-disk",
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:us-prod-event-high-disk",
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:us-prod-backend-high-cpu",
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:us-prod-event-high-cpu",
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:us-prod-backend-high-ram",
+          "arn:aws:cloudwatch:us-east-1:123456789012:alarm:us-prod-event-high-ram"
+        ]
+      }
+    },
+    {
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "width": 24,
+      "height": 2,
+      "properties": {
+        "background": "transparent",
+        "markdown": "&nbsp;\n# US-Prod"
+      }
+    },
+    {
+      "type": "text",
+      "x": 0,
+      "y": 20,
+      "width": 24,
+      "height": 2,
+      "properties": {
+        "background": "transparent",
+        "markdown": "&nbsp;\n# AU-Prod"
+      }
+    }
+  ]
+}
