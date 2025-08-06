@@ -70,8 +70,11 @@ aws-cloudwatch-monitoring-dashboard/
 
 ## Sample Alarms
 
-- [us-prod-backend-high-cpu](https://github.com/kimdobinn/aws-cloudwatch-monitoring/blob/main/cloudformation/us-prod-alarms.yaml#L12)
-- [your-api-5XX-alarm](https://github.com/kimdobinn/aws-cloudwatch-monitoring/blob/main/dashboard_sanitized.json#L190)
+[aws-cli format](alarms/aws-cli/sg-production-backend-high-network-in-percent-alarm.sh)
+
+[cloudformation yaml format](alarms/cloudformation/sg-production-backend-high-network-in-percent-alarm.yaml)
+
+[json format](alarms/json/sg-production-backend-high-network-in-percent-alarm.json)
 
 ## Testing
 
