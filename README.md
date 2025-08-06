@@ -32,6 +32,7 @@ A full-featured AWS CloudWatch dashboard setup for monitoring EC2 and ELB resour
 - **Grouped Alarms View** by environment
 
 [View dashboard image here](dashboard/dashbaord-config.json)
+
 [View dashboard json here](dashboard/dashboard.png)
 
 ## 📂 Project Structure
