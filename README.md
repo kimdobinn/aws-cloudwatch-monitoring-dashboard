@@ -31,9 +31,9 @@ A full-featured AWS CloudWatch dashboard setup for monitoring EC2 and ELB resour
 - **Anomaly Detection Band** for backend memory usage
 - **Grouped Alarms View** by environment
 
-[Dashboard](dashboard/dashbaord.png)
+[Dashboard](dashboard/dashboard.png)
 
-[JSON](dashboard/dashbaord-config.json)
+[JSON](dashboard/dashboard-config.json)
 
 ## 📂 Project Structure
 
