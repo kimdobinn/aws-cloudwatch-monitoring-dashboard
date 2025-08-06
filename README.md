@@ -2,7 +2,7 @@
 
 A full-featured AWS CloudWatch dashboard setup for monitoring EC2 and ELB resources across multiple environments and regions (US-Prod, AU-Prod, SG-UAT, SG-STG-Demo). Designed to improve operational awareness through customizable metrics, alarms, and real-time visualization.
 
-## 🔧 Tools & Skills
+## Tools & Skills
 
 - **AWS CloudWatch**: Dashboards, metrics, anomaly detection, and alarms
 - **CloudFormation (YAML & JSON)**: Dashboard provisioning and alarm deployment
@@ -10,7 +10,7 @@ A full-featured AWS CloudWatch dashboard setup for monitoring EC2 and ELB resour
 - **IAM & SNS**: Permissions and alerting pipeline for alarm notifications
 - **JSON & Markdown**: Dashboard definitions and documentation
 
-## 📊 Monitoring Capabilities
+## Monitoring Capabilities
 
 ### Metrics Tracked
 - **EC2 CPUUtilization**
@@ -34,18 +34,23 @@ A full-featured AWS CloudWatch dashboard setup for monitoring EC2 and ELB resour
 ## 📂 Project Structure
 
 ```
-cloudwatch-monitoring-dashboard/
-├── dashboard_full.json            # Full dashboard JSON definition with real metrics and alarms
-├── dashboard_sanitized.json       # Censored version for GitHub (IDs & ARNs masked)
-├── cloudformation/
-│   ├── us-prod-alarms.yaml        # CloudFormation YAML template for US alarms
-│   └── other-environments.json    # Additional environments as JSON alarm configs
-├── cli/
-│   └── create_alarms.sh           # Bash script to deploy alarms via AWS CLI
-├── README.md                      # Project documentation (this file)
+aws-cloudwatch-monitoring-dashboard/
+├── alarms/
+│   ├── aws-cli/
+|   |   ├── sg-production-backend-high-network-in-percent-alarm.sh
+│   ├── cloudformation/
+|   |   ├── sg-production-backend-high-network-in-percent-alarm.yaml
+│   ├── json/
+|   |   ├── sg-production-backend-high-network-in-percent-alarm.json
+├── dashboard/
+│   ├── dashboard-config.json
+├── sns/
+│   ├── sample-sns-email.txt
+├── dashboard.png
+├── README.md
 ```
 
-## 🧠 Key Features Demonstrated
+## Key Features Demonstrated
 
 1. **Cross-Region, Multi-Account Dashboarding**
    - Integrated dashboards for multiple prod and test environments.
@@ -63,12 +68,12 @@ cloudwatch-monitoring-dashboard/
 5. **Production-Ready Layout**
    - Strategic grouping of widgets for clarity and operational triage.
 
-## ✅ Sample Alarms
+## Sample Alarms
 
 - [us-prod-backend-high-cpu](https://github.com/kimdobinn/aws-cloudwatch-monitoring/blob/main/cloudformation/us-prod-alarms.yaml#L12)
 - [your-api-5XX-alarm](https://github.com/kimdobinn/aws-cloudwatch-monitoring/blob/main/dashboard_sanitized.json#L190)
 
-## 🧪 Testing
+## Testing
 
 You can deploy alarms manually using AWS CLI:
 
@@ -82,11 +87,11 @@ Or deploy an entire alarm stack using CloudFormation:
 aws cloudformation deploy   --template-file cloudformation/us-prod-alarms.yaml   --stack-name cw-us-prod-alarms   --capabilities CAPABILITY_IAM
 ```
 
-## 🔐 Notes
+## Notes
 
 - All `InstanceId`, `ARN`, and internal identifiers have been masked in the public version.
 - Region defaults are set to `ap-southeast-1` (Singapore) and `us-east-1`.
 
-## 👤 Author
+## Author
 
 [@kimdobinn](https://github.com/kimdobinn)
