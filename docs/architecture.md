@@ -26,17 +26,6 @@ This document explains the technical design and structure of the CloudWatch moni
 
 ---
 
-## 🧩 Variable Strategy
-
-The dashboard uses **3 `property` variables** for maximum flexibility:
-
-| Variable     | Scope          | Used By              |
-|--------------|----------------|----------------------|
-| `region`     | AWS Region     | All widgets & alarms |
-| `InstanceId` | EC2 Resources  | CPU, RAM, Disk       |
-| `LoadBalancer` | ELB Resources | Request, Error Rates |
-
-These variables allow dynamic switching between regions and resources without creating separate dashboards.
 
 ---
 
