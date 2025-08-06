@@ -31,7 +31,8 @@ A full-featured AWS CloudWatch dashboard setup for monitoring EC2 and ELB resour
 - **Anomaly Detection Band** for backend memory usage
 - **Grouped Alarms View** by environment
 
-[View dashboard json here](dashboard/dashbaord-config.json)
+[View dashboard image here](dashboard/dashbaord-config.json)
+[View dashboard json here](dashboard/dashboard.png)
 
 ## 📂 Project Structure
 
@@ -46,9 +47,9 @@ aws-cloudwatch-monitoring-dashboard/
 |   |   ├── sg-production-backend-high-network-in-percent-alarm.json
 ├── dashboard/
 │   ├── dashboard-config.json
+│   ├── dashboard.png
 ├── sns/
 │   ├── sample-sns-email.txt
-├── dashboard.png
 ├── README.md
 ```
 
@@ -78,20 +79,6 @@ aws-cloudwatch-monitoring-dashboard/
 [View 'cloudformation yaml' format here](alarms/cloudformation/sg-production-backend-high-network-in-percent-alarm.yaml)
 
 [View 'json format' here](alarms/json/sg-production-backend-high-network-in-percent-alarm.json)
-
-## Testing
-
-You can deploy alarms manually using AWS CLI:
-
-```bash
-aws cloudwatch put-metric-alarm --cli-input-json file://cloudformation/us-prod-cpu-alarm.json
-```
-
-Or deploy an entire alarm stack using CloudFormation:
-
-```bash
-aws cloudformation deploy   --template-file cloudformation/us-prod-alarms.yaml   --stack-name cw-us-prod-alarms   --capabilities CAPABILITY_IAM
-```
 
 ## Notes
 
