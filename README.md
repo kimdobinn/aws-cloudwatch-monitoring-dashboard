@@ -31,6 +31,8 @@ A full-featured AWS CloudWatch dashboard setup for monitoring EC2 and ELB resour
 - **Anomaly Detection Band** for backend memory usage
 - **Grouped Alarms View** by environment
 
+[View dashboard json here](dashboard/dashbaord-config.json)
+
 ## 📂 Project Structure
 
 ```
@@ -64,17 +66,18 @@ aws-cloudwatch-monitoring-dashboard/
 
 4. **Alerting via SNS**
    - Alarms routed through SNS topics for immediate notification.
+   - [View sample SNS here](sns/sample-sns-email.txt)
 
 5. **Production-Ready Layout**
    - Strategic grouping of widgets for clarity and operational triage.
 
 ## Sample Alarms
 
-[aws-cli format](alarms/aws-cli/sg-production-backend-high-network-in-percent-alarm.sh)
+[View 'aws-cli-format' here](alarms/aws-cli/sg-production-backend-high-network-in-percent-alarm.sh)
 
-[cloudformation yaml format](alarms/cloudformation/sg-production-backend-high-network-in-percent-alarm.yaml)
+[View 'cloudformation yaml' format here](alarms/cloudformation/sg-production-backend-high-network-in-percent-alarm.yaml)
 
-[json format](alarms/json/sg-production-backend-high-network-in-percent-alarm.json)
+[View 'json format' here](alarms/json/sg-production-backend-high-network-in-percent-alarm.json)
 
 ## Testing
 
